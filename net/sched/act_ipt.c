@@ -49,10 +49,10 @@ static int ipt_init_target(struct xt_entry_target *t, char *table, unsigned int 
 					t->u.user.revision);
 	if (IS_ERR(target))
 		return PTR_ERR(target);
-
+    memset(&par, 0, sizeof(par));
 	t->u.kernel.target = target;
 	par.table     = table;
-	par.entryinfo = NULL;
+
 	par.target    = target;
 	par.targinfo  = t->data;
 	par.hook_mask = hook;
