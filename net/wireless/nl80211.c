@@ -6589,6 +6589,10 @@ static int nl80211_set_rekey_data(struct sk_buff *skb, struct genl_info *info)
 			nl80211_rekey_policy);
 	if (err)
 		return err;
+      
+     if (!tb[NL80211_REKEY_DATA_REPLAY_CTR] || !tb[NL80211_REKEY_DATA_KEK] ||
+	    !tb[NL80211_REKEY_DATA_KCK])
+		return -EINVAL;
 
 	if (nla_len(tb[NL80211_REKEY_DATA_REPLAY_CTR]) != NL80211_REPLAY_CTR_LEN)
 		return -ERANGE;
